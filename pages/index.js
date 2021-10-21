@@ -1,3 +1,4 @@
 import '../test.css';
+import { Button } from 'antd';
 
-export default () => <span>1234</span>
+export default () => <Button>1234</Button>
