@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import Router from 'next/router';
 import { Button } from 'antd';
+import dynamic from 'next/dynamic';
+import Comp from '../component/Layout.jsx';
 
+const AsyncComp = dynamic(import('../component/Layout')); // 此时是异步组件；
 // function gotoTestB() {
 //   Router.push('/a');
 // }
@@ -33,6 +36,7 @@ function gotoTestB() {
 
 export default () => (
   <div>
+    <Comp />
     <Link href="/a?id=2" as="/a/2"> 
       <Button>a</Button>
     </Link>

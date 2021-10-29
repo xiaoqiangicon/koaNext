@@ -16,3 +16,22 @@ koa + next
 ### getInitialProps 1.在页面中获取数据  2.在APP中获取全局数据(客服端和服务端数据之间的同步) 
 ### nextjs的数据获取规范；应该尽量把数据获取相关的放到这个方法里面；
 ### 只有在page下面的getInitialProps会被调用，其他文件夹下的不会调用；在服务端和客户端渲染都会有；
+
+### 自定义app.js
+### 1.固定Layout; 2.保持一些公用的状态 3.给页面传入一些自定义数据；4.自定义错误处理；
+
+
+### 自定义document
+### 1.只有在服务端渲染的时候才会被调用  2.用来修改服务端渲染的文档内容   3.一般用来配合第三方css-in-js方案使用
+
+
+### ssr流程
+### 1.浏览器发起page请求，2.koa接收到请求，来调用nextjs；3.nextjs开始渲染； 4.调用app的getInitialProps; 5.调用页面的getInitialProps; 6.渲染出最终html；7.返回给浏览器；
+
+### 客户端渲染
+### 1.点击链接按钮；2.异步加载页面的组件js；3.调用页面的getInitialProps;4.数据返回，路由变化；
+
+
+### oAUTH授权和认证
+### 主要看oauth提供方
+### refresh Token;  Authentication code;  Device code;  
