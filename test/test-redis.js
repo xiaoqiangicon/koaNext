@@ -6,7 +6,7 @@ async function test() {
   })
   await redis.set('c', 123);
   await redis.setex('a', 100, 'lee');
-  console.log(await redis.get('abc'));
+  console.log(await redis.get('a'));
 }
 
 test();
