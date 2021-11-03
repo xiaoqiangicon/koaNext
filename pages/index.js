@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
+import axios from 'axios';
 import Link from 'next/link';
 import Router from 'next/router';
 import { Button } from 'antd';
 import dynamic from 'next/dynamic';
 import Comp from '../component/Layout.jsx';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 const AsyncComp = dynamic(import('../component/Layout')); // 此时是异步组件；
 // function gotoTestB() {
@@ -34,12 +39,21 @@ function gotoTestB() {
   }, '/a/1');
 }
 
-export default () => (
-  <div>
-    <Comp />
-    <Link href="/a?id=2" as="/a/2"> 
-      <Button>a</Button>
-    </Link>
-    <Button onClick={gotoTestB}>test b</Button>
-  </div>
-)
+export default () => {
+  // useEffect(() => {
+  //   axios.get('api/user/info').then(resp => {
+  //     console.log(resp);
+  //   })
+  // }, [])
+
+  return (
+    <div>
+      <Comp />
+      <Link href="/a?id=2" as="/a/2"> 
+        <Button>a</Button>
+      </Link>
+      <Button onClick={gotoTestB}>test b</Button>
+      <a href={publicRuntimeConfig.OAUTH_URL}>授权</a>
+    </div>
+  )
+}

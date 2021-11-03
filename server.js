@@ -3,6 +3,7 @@ const Router = require('koa-router');
 const next = require('next');
 const session = require('koa-session');
 const Redis = require('ioredis');
+const auth = require('./server/auth');
 
 const RedisSessionStore = require('./server/session-store');
 
@@ -26,19 +27,22 @@ app.prepare().then(() => {
   // 告诉koa需要使用session
   server.use(session(SESSION_CONFIG, server))
 
-  router.get('/set/user', async ctx => {
-    ctx.session.user = {
-      name: 'lee',
-      age: '18'
-    }
+  // 配置处理github oauth登陆
+  auth(server);
 
-    ctx.body = 'set session success';
-  })
+  // router.get('/set/user', async ctx => {
+  //   ctx.session.user = {
+  //     name: 'lee',
+  //     age: '18'
+  //   }
 
-  router.get('/delete/user', async ctx => {
-    ctx.session = null
-    ctx.body = 'delete session success';
-  })
+  //   ctx.body = 'set session success';
+  // })
+
+  // router.get('/delete/user', async ctx => {
+  //   ctx.session = null
+  //   ctx.body = 'delete session success';
+  // })
 
   router.get('/a/:id', async (ctx) => {
     const id = ctx.params.id;
@@ -52,6 +56,20 @@ app.prepare().then(() => {
     ctx.respond = false;
   })
 
+  router.get('/api/user/info', async (ctx) => {
+    const user = ctx.session.userInfo;
+    console.log(ctx.session.userInfo, ctx.session, '这里是ctx');
+    if (user) {
+      ctx.body = user;
+      ctx.set('Content-Type', 'application/json')
+    } else {
+      ctx.status = 401;
+      ctx.body = 'need login';
+    }
+  })
+
+
+  // 使用Nextjs操作后续处理
   server.use(router.routes());
   server.use(async (ctx, next) => {
     // ctx.cookies.set('id', 'cookie', {
