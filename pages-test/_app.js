@@ -1,7 +1,6 @@
 import App, { Container } from 'next/app';
 import 'antd/dist/antd.css';
 import Layout from '../component/Layout';
-import { Provider } from 'react-redux';
 
 class MyApp extends App {
   // Componentd对应的就是render中的component;
@@ -18,11 +17,13 @@ class MyApp extends App {
   render() {
     // component对应的就是每个页面;
     const { Component, pageProps } = this.props;
+    console.log(Component, '1')
     return (
       <Container>
         <Layout>
-          <Component {...pageProps} />
+          <span>over</span>
         </Layout>
+        <Component {...pageProps} />
       </Container>
     )
   }
