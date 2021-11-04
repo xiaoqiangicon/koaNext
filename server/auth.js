@@ -26,7 +26,6 @@ module.exports = (server) => {
       })
 
       if (result.status === 200 && (result.data && !result.data.error)) {
-        console.log('成功啦', 'fdjksfjksdajfksdjfasd')
         ctx.session.githubAuth = result.data;
 
         const { access_token, token_type } = result.data;

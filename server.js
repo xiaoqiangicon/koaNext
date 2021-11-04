@@ -76,7 +76,8 @@ app.prepare().then(() => {
     //   httpOnly: false,
     // })
 
-    await handle(ctx.req, ctx.res)
+    ctx.req.session = ctx.session;
+    await handle(ctx.req, ctx.res);
     ctx.response = false;
   })
 

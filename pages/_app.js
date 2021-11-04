@@ -1,7 +1,8 @@
 import App, { Container } from 'next/app';
+import { Provider } from 'react-redux';
 import 'antd/dist/antd.css';
 import Layout from '../component/Layout';
-import { Provider } from 'react-redux';
+import store from '../store/store';
 
 class MyApp extends App {
   // Componentd对应的就是render中的component;
@@ -21,7 +22,9 @@ class MyApp extends App {
     return (
       <Container>
         <Layout>
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
         </Layout>
       </Container>
     )
