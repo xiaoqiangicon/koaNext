@@ -4,6 +4,8 @@ import reduxThunk from 'redux-thunk';
 // 但是现有机制无法处理；
 // 为什么需要recat-redux；因为需要把组件和store链接起来；
 
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 // 不同数据可能有不同的state;
 const initialState = {
   count: 0,
@@ -39,7 +41,7 @@ function counter(state = initialState, action) {
   switch(action.type) {
     // 每次都返回一个新的对象；
     case ADD:
-      return { ...initialState, count: action.num}
+      return { ...initialState, count: state.count + (action.num || 1)}
     default:
       return state
   }
@@ -60,9 +62,7 @@ const allReducers = combineReducers({
   user,
 })
 
-const store = createStore(allReducers, {}, applyMiddleware(reduxThunk));
-
-console.log(store, 'store')
+const store = createStore(allReducers, {}, composeWithDevTools(applyMiddleware(reduxThunk)));
 
 // 定义之前更新state不会触发
 store.subscribe(() => {
@@ -73,3 +73,13 @@ store.dispatch(addAsync(5));
 store.dispatch({type: UPDATE_USERNAME, name: 'haha'})
 
 export default store;
+
+// export default function initializeStore() {
+//   const store = createStore(
+//     allReducers, 
+//     {}, 
+//     composeWithDevTools(applyMiddleware(reduxThunk))
+//   );
+
+//   return store;
+// }

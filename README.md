@@ -34,4 +34,11 @@ koa + next
 
 ### oAUTH授权和认证
 ### 主要看oauth提供方
-### refresh Token;  Authentication code;  Device code;  
+### refresh Token;  Authentication code;  Device code
+
+
+### 服务端如何写入数据到store;
+### 如何同步服务端的数据到客户端;
+
+
+

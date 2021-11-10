@@ -3,10 +3,12 @@ import { Provider } from 'react-redux';
 import 'antd/dist/antd.css';
 import Layout from '../component/Layout';
 import store from '../store/store';
+import testHoc from '../libs/with-redux';
 
 class MyApp extends App {
   // Componentd对应的就是render中的component;
-  static async getInitialProps ({ Component, ctx }) {
+  static async getInitialProps (ctx) {
+    const { Component } = ctx;
     // 每次页面切换这个方法都会执行；
     let pageProps;
     if (Component.getInitialProps) {
