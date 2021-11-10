@@ -1,4 +1,4 @@
-import store from '../store/store';
+import store from '../store/store-test';
 import { connect } from 'react-redux';
 
 const Index = ({counter, username, add, rename}) => {
